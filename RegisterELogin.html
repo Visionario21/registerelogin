@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        // Validação
+        const registerForm = document.querySelector("form[action='/register']");
+        registerForm.addEventListener("submit", function(event) {
+            const username = document.querySelector("#username");
+            const email = document.querySelector("#email");
+            const password = document.querySelector("#password");
+            const confirmPassword = document.querySelector("#confirm-password");
+
+            if (password.value !== confirmPassword.value) {
+                alert("Passwords do not match.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!username.checkValidity() || !email.checkValidity() || !password.checkValidity()) {
+                event.preventDefault();
+                return;
+            }
+        });
+    </script>
+</body>
+</html>
